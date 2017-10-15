@@ -28,7 +28,7 @@ N and dt were tuned to 10 and 0.1, respectively, and served to provide a good co
 For preprocessing, the reference trajectory was converted into the vehicle's reference frame. The reference way points were transformed using the phi angle of the vehicle state. The waypoints were then processed using polyfit and polyeval.
 
 #### Model Predictive Control with Latency
-Latency is simulated in this project via a 100 ms sleep. This latency serves to help make the simulation closer to the real world challenge of utilizing MPC on an autonomous vehicle, by replicating the inherent latency in actuator dynamics. In order to compensate for the latency in the system, the MPC initial state is adjusted to accouint for the latency in the system.
+Latency is simulated in this project via a 100 ms sleep. This latency serves to help make the simulation closer to the real world challenge of utilizing MPC on an autonomous vehicle, by replicating the inherent latency in actuator dynamics. In order to compensate for the latency in the system, the MPC model incorporates the latency in the system. There are various other means for compensating for latency in the system. 
 
 ## Dependencies
 
