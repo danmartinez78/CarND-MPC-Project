@@ -3,6 +3,33 @@ Self-Driving Car Engineer Nanodegree Program
 
 ---
 
+
+## Writeup
+#### Introduction
+In this project, model predictive control is used to drive a car along a desired trajectory in simulation. 
+
+#### The Model
+The kinematic model consists of six state variables for the vehicle. 
+These variables are; x and y coordinates, orientation angle (psi), and velocity, as well as the cross-track error (cte) and psi error (epsi). 
+An additional constant, Lf is used, which measures the distance between the front of the vehicle and its center of gravity. 
+The model is used to compute the next state given the current state and actuator values. 
+The actuator values, and output of the controller, consist of a throttle and steering angle.
+
+#### Timestep Length and Elapsed Duration (N & dt)
+The prediction horizon, T, is the duration over which future predictions are made. 
+As discussed in the lectures, T = N*dt. 
+The value dt describes the time between actuations, and N enumarates the number of time steps to the horizon.
+As such the values of N and dt should be selected in order to produce a reasonable horizon with sufficient descritization. 
+The value of dt should be as small as possible, while N will dictate the number of variables to be optimized by the controller.
+For this application, a T od 1 second was selected as a reasonable time horizon given the velocity of the vehicle.
+N and dt were tuned to 10 and 0.1, respectively, and served to provide a good compromise in descritization and computability.
+
+#### Polynomial Fitting and MPC Preprocessing
+For preprocessing, the reference trajectory was converted into the vehicle's reference frame. The reference way points were transformed using the phi angle of the vehicle state. The waypoints were then processed using polyfit and polyeval.
+
+#### Model Predictive Control with Latency
+Latency is simulated in this project via a 100 ms sleep. This latency serves to help make the simulation closer to the real world challenge of utilizing MPC on an autonomous vehicle, by replicating the inherent latency in actuator dynamics. In order to compensate for the latency in the system, the MPC initial state is adjusted to accouint for the latency in the system.
+
 ## Dependencies
 
 * cmake >= 3.5
